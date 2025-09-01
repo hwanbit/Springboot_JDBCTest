@@ -47,4 +47,19 @@ public class JDBCController {
         model.addAttribute("person", person);
         return "viewPage01_edit";
     }
+
+    @PostMapping("/update")
+    public String updateMethod(@ModelAttribute("Person") Person person) {
+        String sql = "update person set name = ?, age = ?, email = ? where id = ?";
+        Object[] params = {person.getName(), person.getAge(), person.getEmail(), person.getId()};
+        int resultCount = jdbcTemplate.update(sql, params);
+        return "redirect:/exam01";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteMethod(@PathVariable(name="id") int id) {
+        String sql = "delete from person where id = ?";
+        int resultCount = jdbcTemplate.update(sql, id);
+        return "redirect:/exam01";
+    }
 }
