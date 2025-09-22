@@ -53,5 +53,4 @@ public class Example03Controller {
         repository.deleteMethod(id);
         return "redirect:/exam03";
     }
-
 }
